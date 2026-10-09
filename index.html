@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کانفیگ VLESS | هلند</title>
+<style>
+  * { box-sizing: border-box; font-family: Vazirmatn, Tahoma, sans-serif; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e90ff, #004aad);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    background: #fff;
+    max-width: 650px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    text-align: center;
+  }
+  .card h1 { margin: 0 0 5px; font-size: 22px; color: #0a2a5e; }
+  .card p.sub { color: #555; font-size: 14px; margin: 0 0 20px; }
+  .config-box {
+    background: #f1f5f9;
+    border: 1.5px dashed #0a58ca;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 12px;
+    word-break: break-all;
+    direction: ltr;
+    text-align: left;
+    color: #111;
+    max-height: 140px;
+    overflow-y: auto;
+  }
+  .btn-copy {
+    margin-top: 15px;
+    background: #0a58ca;
+    color: #fff;
+    border: none;
+    padding: 12px 35px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .btn-copy:hover { background: #084298; transform: translateY(-1px); }
+  .msg { font-size: 13px; color: green; height: 20px; margin-top: 8px; }
+  .clock-box {
+    margin-top: 20px;
+    background: #0a2a5e;
+    color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+  }
+  .clock-box .time { font-size: 28px; font-weight: bold; letter-spacing: 1px; }
+  .clock-box .date { font-size: 15px; margin-top: 5px; }
+  .footer {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #444;
+    background: #eef4ff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🇳🇱 هلند | تست کانکشن ✅</h1>
+  <p class="sub">🤖 تلگرام: iroNetBot</p>
+  <div class="config-box" id="configText">vless://61633734-3532-4334-a433-616463393963@37.32.44.67:443?path=%2Fl%2Fw%2FaXD2QyDdS6vRQpxs%3Fed%3D2047&security=tls&encryption=none&allowInsecure=1&host=dl.namava.ir&sni=dl.namava.ir&type=ws#%D9%87%D9%84%D9%86%D8%AF%20%F0%9F%87%B3%F0%9F%87%B1%20%7C%20%D8%AA%D8%B3%D8%AA%20%DA%A9%D8%A7%D9%86%DA%A9%D8%B4%D9%86%20%E2%9C%85%20%7C%20%F0%9F%A4%96%20%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%3AiroNetBot</div>
+  <button class="btn-copy" onclick="copyConfig()">📋 کپی کانفیگ</button>
+  <div class="msg" id="msg"></div>
+  <div class="clock-box">
+    <div class="time" id="clock">--:--:--</div>
+    <div class="date" id="date">در حال بارگذاری تاریخ...</div>
+  </div>
+  <div class="footer" id="publishDate">
+    📌 این کانفیگ در تاریخ <b>۱۷ مهر ۱۴۰۵</b> در این سایت قرار گرفته است.
+  </div>
+</div>
+<script>
+const config = document.getElementById('configText').innerText.trim();
+function copyConfig() {
+  navigator.clipboard.writeText(config).then(() => {
+    document.getElementById('msg').innerText = '✅ کانفیگ با موفقیت کپی شد!';
+    setTimeout(() => document.getElementById('msg').innerText = '', 2500);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = config;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    document.getElementById('msg').innerText = '✅ کانفیگ با موفقیت کپی شد!';
+  });
+}
+function updateClock() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  document.getElementById('clock').innerText = timeStr;
+  try {
+    const dateStr = new Intl.DateTimeFormat('fa-IR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).format(now);
+    document.getElementById('date').innerText = 'امروز ' + dateStr;
+  } catch(e) {
+    document.getElementById('date').innerText = now.toLocaleDateString('fa-IR');
+  }
+}
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+</body>
+</html>
